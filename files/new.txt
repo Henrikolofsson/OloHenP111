@@ -1,5 +1,5 @@
-1
-1000
+3
+500
 10
 UP and
 images/new1.jpg

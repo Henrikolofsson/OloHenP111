@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 
 public class TextfileProducer implements MessageProducer {
     private int delay;
@@ -27,10 +26,6 @@ public class TextfileProducer implements MessageProducer {
                     messageText = reader.readLine();
                     messageIcon = new ImageIcon(reader.readLine());
                     messages[i] = new Message(messageText, messageIcon);
-                }
-
-                for(int i = 0; i < size; i++) {
-                    System.out.println(messages[i]);
                 }
             } catch(UnsupportedEncodingException e) {
                 System.out.println("Problem with encoding in textfile");

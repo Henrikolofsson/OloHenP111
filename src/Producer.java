@@ -11,9 +11,10 @@ public class Producer extends Thread {
         this.messageBuffer = messageBuffer;
     }
 
-    public void start() {
+    public void run() {
         int prodbuffsize = producerBuffer.size();
-        for (int i = 0; i < prodbuffsize; i++) {
+        while(true) {
+        //for (int i = 0; i < prodbuffsize; i++) {
             try {
                 messageProducer = producerBuffer.get();
                 delay = messageProducer.delay();

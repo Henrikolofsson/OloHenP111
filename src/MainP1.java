@@ -18,7 +18,7 @@ public class MainP1 {
 		producer.start();
 		
 		MessageProducerInput ipManager = new MessageProducerInput(producerBuffer);		
-		ipManager.addMessageProducer(getArrayProducer(1000,100));
+		ipManager.addMessageProducer(getArrayProducer(2,500));
 		ipManager.addMessageProducer(new ShowGubbe(3000));
 		ipManager.addMessageProducer(new TextfileProducer("files/new.txt"));
 	}

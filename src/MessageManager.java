@@ -10,22 +10,19 @@ public class MessageManager extends Thread {
         viewers = new ArrayList<>();
     }
 
-    public void start() {
+    public void run() {
         while(!Thread.interrupted()) {
             try {
-                message = messageBuffer.get();
-                System.out.println(message);
-                if(message != null) {
-                    for(P1Viewer viewer : viewers) {
-                        viewer.handleMessage(message);
-                    }
-                }
-                Thread.sleep(50);
-            } catch(InterruptedException e) {
+                    message = messageBuffer.get();
+                    for(P1Viewer viewer : viewers)
+                        viewer.setMessage(message);
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
+
 
     public void setListenerViewer(P1Viewer p1Viewer) {
         viewers.add(p1Viewer);

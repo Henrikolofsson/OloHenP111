@@ -18,4 +18,5 @@ public class Buffer<T> {
 	public int size() {
 		return buffer.size();
 	}
+
 }
