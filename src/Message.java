@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.io.Serializable;
 
-public class Message implements Serializable, Msg {
+public class Message implements Serializable {
     private String text;
     private Icon icon;
 

@@ -1,68 +1,37 @@
-public class Producer {
+public class Producer extends Thread {
     private Buffer<MessageProducer> producerBuffer;
     private Buffer<Message> messageBuffer;
-    private ProducerThread prodThread;
+    private MessageProducer messageProducer;
+    private int delay;
+    private int size;
+    private int times;
 
     public Producer(Buffer<MessageProducer> prodBuffer, Buffer<Message> messageBuffer) {
         this.producerBuffer = prodBuffer;
         this.messageBuffer = messageBuffer;
-        prodThread = new ProducerThread(prodBuffer, messageBuffer);
     }
 
-    //TODO
     public void start() {
-        prodThread.start();
-    }
+        int prodbuffsize = producerBuffer.size();
+        for (int i = 0; i < prodbuffsize; i++) {
+            try {
+                messageProducer = producerBuffer.get();
+                delay = messageProducer.delay();
+                size = messageProducer.size();
+                times = messageProducer.times();
+                Message message;
 
-    private class ProducerThread extends Thread {
-        private Buffer<MessageProducer> producerBuffer;
-        private Buffer<Message> messageBuffer;
-        private MessageProducer messageProducer;
-        private int delay;
-        private int size;
-        private int times;
-
-        public ProducerThread(Buffer<MessageProducer> prodBuffer, Buffer<Message> messageBuffer) {
-            this.producerBuffer = prodBuffer;
-            this.messageBuffer = messageBuffer;
-        }
-
-        public synchronized void start() {
-            for(int i = 0; i < producerBuffer.size(); i++) {
-                try {
-                    for (int j = 0; j < producerBuffer.get().size(); j++) {
-                        messageBuffer.put(producerBuffer.get().nextMessage());
-                        wait(producerBuffer.get().delay());
+                for (int j = 0; j < times; j++) {
+                    for (int k = 0; k < size; k++) {
+                        message = messageProducer.nextMessage();
+                        messageBuffer.put(message);
+                        Thread.sleep(delay);
+                        System.out.println(message.getText());
                     }
-                } catch(InterruptedException e) {
-                    e.printStackTrace();
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-
-        }
-
-        public int getDelay() {
-            return delay;
-        }
-
-        public void setDelay(int delay) {
-            this.delay = delay;
-        }
-
-        public int getSize() {
-            return size;
-        }
-
-        public void setSize(int size) {
-            this.size = size;
-        }
-
-        public int getTimes() {
-            return times;
-        }
-
-        public void setTimes(int times) {
-            this.times = times;
         }
     }
 }

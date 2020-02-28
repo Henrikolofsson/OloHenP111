@@ -23,7 +23,7 @@ public class TestProducer {
 		Buffer<Message> messageBuffer	= new Buffer<Message>();
 				
 		MessageProducerInput mpInput = new MessageProducerInput(producerBuffer);		
-        mpInput.addMessageProducer(getArrayProducer(2,1000));
+        mpInput.addMessageProducer(getArrayProducer(1,1000));
         mpInput.addMessageProducer(new TextfileProducer("files/new.txt"));
 		
 		Producer producer = new Producer(producerBuffer,messageBuffer);

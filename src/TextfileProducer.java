@@ -7,9 +7,8 @@ public class TextfileProducer implements MessageProducer {
     private int delay;
     private int times;
     private int size;
-    private Message message;
     private Message[] messages;
-    int index = -1;
+    private int index = -1;
 
     public TextfileProducer(String path) {
         try {
@@ -27,8 +26,7 @@ public class TextfileProducer implements MessageProducer {
                 for(int i = 0; i < size; i++) {
                     messageText = reader.readLine();
                     messageIcon = new ImageIcon(reader.readLine());
-                    index++;
-                    messages[index] = new Message(messageText, messageIcon);
+                    messages[i] = new Message(messageText, messageIcon);
                 }
 
                 for(int i = 0; i < size; i++) {

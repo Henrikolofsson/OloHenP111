@@ -1,18 +1,16 @@
-import javax.swing.*;
-import java.awt.*;
 
-public class P1Viewer extends JPanel {
+public class P1Viewer extends Viewer implements MessageHandler {
     private MessageManager messageManager;
-    private int height;
-    private int width;
 
     public P1Viewer(MessageManager messageManager, int width, int height) {
+        super(width, height);
         this.messageManager = messageManager;
-        this.width = width;
-        this.height = height;
+        messageManager.setListenerViewer(this);
+    }
 
-        this.setSize(new Dimension(width,height));
-        this.setMinimumSize(new Dimension(width, height));
-        this.setLayout(new BorderLayout());
+    @Override
+    public void handleMessage(Message message) {
+        setMessage(message);
+        System.out.println(message);
     }
 }
